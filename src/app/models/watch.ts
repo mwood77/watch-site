@@ -8,6 +8,8 @@ import { Movements } from "./enums/movements";
 export interface Watch {
     manufacturer: string;
     model: string;
+    style: string;
+    homage: string;
     sizeWidth: number;
     sizeLength?: number;
     thickness?: number;
@@ -41,7 +43,7 @@ export interface Luminous {
     colour: Lume;
 }
 
-export interface Bezel {
+export interface Bezel {a
     insertMaterial: string;
     clicks?: string;
     luminous?: Lume;

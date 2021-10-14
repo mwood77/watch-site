@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { map } from "rxjs/operators";
 import { GoogleSheetsDbService } from 'ng-google-sheets-db';
 
 /**
@@ -13,13 +11,15 @@ const sheetToModelMapping = {
   // model | sheet
   manufacturer: "Manufacturer",
   model: "Model",
+  style: "Style",
+  homage: "Homage",
   sizeWidth: "Width",
   sizeLength: "L2L Width",
   thickness: "Thickness",
   lugWitdh: "Lug Width",
   movement: {
     _prefix: "Movement ",
-    manufacturer: "Manufacturer",
+    movementManufacturer: "Manufacturer",
     winding: "Winding",
     bph: "BPH",
   },
@@ -38,6 +38,12 @@ const sheetToModelMapping = {
   strap: {
     _prefix: "Strap ",
     material: "Material",
+    buckle: "Buckle",
+    clasp : {
+      _prefix: "Clasp ",
+      material: "Material",
+      closure: "Closure"
+    }
   },
   warranty: "Warranty",
   link: {
@@ -58,10 +64,7 @@ export class CsvService {
 
   characters$: Observable<any[]>;
 
-  private url : string = `https://docs.google.com/spreadsheets/d/${SHEET}/gviz/tq?tqx=out:json`;
-
-  constructor(private http: HttpClient,
-    private googleSheetsDbService: GoogleSheetsDbService) { }
+  constructor(private googleSheetsDbService: GoogleSheetsDbService) { }
 
   getSheet(): Observable<any> {
     return this.googleSheetsDbService.get<any>(SHEET, WORKSHEET, sheetToModelMapping);

@@ -30,7 +30,7 @@ import { API_KEY, GoogleSheetsDbService } from 'ng-google-sheets-db';
     {
       provide: API_KEY,
       // @todo - key comes from repo secrets
-      useValue: ""
+      useValue: ''
     },
     GoogleSheetsDbService
   ],

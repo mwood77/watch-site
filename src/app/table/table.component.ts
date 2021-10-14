@@ -1,18 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { CsvService } from 'src/utils/csv.service';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+
+import { CsvService } from 'src/utils/csv.service';
 import { AnalyticsService } from '../../utils/analytics.service';
 
 const tableHeaders: Array<string> = [
-	'Manufacturer',
-	'Model',
-	'Width',
-	'Lug Width',
-  'Thickness',
-	'Movement',
-	'Winding Action',
-	'Warranty',
+	'manufacturer',
+	'model',
+	'sizeWidth',
+	'lugWitdh',
+  'sizeLength',
+  'thickness',
+	'movementManufacturer',
+	'winding',
+	'warranty',
 	'Purchase Link',
 ];
 
@@ -21,23 +25,17 @@ const tableHeaders: Array<string> = [
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
-export class TableComponent implements OnInit {
+export class TableComponent implements AfterViewInit {
 
-  dataSource$: Observable<any>;
+  @ViewChild(MatSort) sort: MatSort;
+
+  dataSource: any;
   displayedColumns = tableHeaders;
   columns = new BehaviorSubject<Array<string>>([]);
 
   constructor(
     private analytics: AnalyticsService,
     private csv: CsvService) { }
-
-  ngOnInit(): void {
-    this.csv.getSheet().subscribe(
-      response => {
-        this.dataSource$ = response;
-      }
-    )
-  }
 
   openLink(element:any): void {
     this.analytics.eventEmitter(`open_url_${element.link.readable}`, 'Link-clicked', 'click', `${element.link.readable}`);
@@ -48,10 +46,18 @@ export class TableComponent implements OnInit {
     this.columns.next(columns);
   }
 
-  /**
-   * @todo
-   * - add search filter functionality for table
-   * - add sorting functionality for table
-   */
+
+  searchTable(input: string) {
+    this.dataSource.filter = input.toLocaleLowerCase().trim();
+  }
+
+  ngAfterViewInit() {
+    this.csv.getSheet().subscribe(
+      response => {
+        this.dataSource = new MatTableDataSource(response);
+        this.dataSource.sort = this.sort;
+      }
+    )
+  }
 
 }

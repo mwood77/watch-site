@@ -6,6 +6,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule  } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSortModule } from '@angular/material/sort';
+
 
 @NgModule({
   declarations: [],
@@ -15,14 +17,16 @@ import { MatInputModule } from '@angular/material/input';
     MatButtonModule,
     MatFormFieldModule,
     MatTableModule,
-    MatInputModule
+    MatInputModule,
+    MatSortModule,
   ],
   exports: [
     MatTabsModule,
     MatButtonModule,
     MatFormFieldModule,
     MatTableModule,
-    MatInputModule
+    MatInputModule,
+    MatSortModule,
   ]
 })
 export class MaterialImportModule { }
