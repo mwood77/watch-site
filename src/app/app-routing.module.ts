@@ -4,12 +4,12 @@ import { TableComponent } from './table/table.component';
 
 const routes: Routes = [
   {
-    path: 'home',
+    path: '',
     component: TableComponent,
   },
   {
     path: '**',
-    redirectTo: 'home',
+    redirectTo: '',
   },
 ];
 

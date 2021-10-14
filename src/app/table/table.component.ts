@@ -1,17 +1,20 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatAccordion } from '@angular/material/expansion';
+
+import { BehaviorSubject } from 'rxjs';
 
 import { CsvService } from 'src/utils/csv.service';
 import { AnalyticsService } from '../../utils/analytics.service';
+import { Watch } from '../models/watch';
 
 const tableHeaders: Array<string> = [
 	'manufacturer',
 	'model',
 	'sizeWidth',
-	'lugWitdh',
+	'lugWidth',
   'sizeLength',
   'thickness',
 	'movementManufacturer',
@@ -23,15 +26,26 @@ const tableHeaders: Array<string> = [
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  styleUrls: ['./table.component.scss'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class TableComponent implements AfterViewInit {
 
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatAccordion) accordion: MatAccordion;
 
   dataSource: any;
   displayedColumns = tableHeaders;
   columns = new BehaviorSubject<Array<string>>([]);
+  isLoadingResults = true;
+
+  expandedElement: Watch | null;
 
   constructor(
     private analytics: AnalyticsService,
@@ -56,6 +70,7 @@ export class TableComponent implements AfterViewInit {
       response => {
         this.dataSource = new MatTableDataSource(response);
         this.dataSource.sort = this.sort;
+        this.isLoadingResults = false;
       }
     )
   }

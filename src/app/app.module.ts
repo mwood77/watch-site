@@ -12,11 +12,10 @@ import { TableComponent } from './table/table.component';
 
 import { API_KEY, GoogleSheetsDbService } from 'ng-google-sheets-db';
 
-
 @NgModule({
   declarations: [
     AppComponent,
-    TableComponent
+    TableComponent,
   ],
   imports: [
     HttpClientModule,

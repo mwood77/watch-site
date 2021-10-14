@@ -47,7 +47,7 @@ export interface Bezel {a
     insertMaterial: string;
     clicks?: string;
     luminous?: Lume;
-    colours: [Colours];
+    colour: [Colours];
 }
 
 export interface Warranty {
