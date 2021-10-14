@@ -11,6 +11,7 @@ import { MaterialImportModule } from './material-import/material-import.module';
 import { TableComponent } from './table/table.component';
 
 import { API_KEY, GoogleSheetsDbService } from 'ng-google-sheets-db';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -28,8 +29,7 @@ import { API_KEY, GoogleSheetsDbService } from 'ng-google-sheets-db';
     AnalyticsService,
     {
       provide: API_KEY,
-      // @todo - key comes from repo secrets
-      useValue: ''
+      useValue: environment.key
     },
     GoogleSheetsDbService
   ],

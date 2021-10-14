@@ -10,6 +10,9 @@
 		<mat-spinner *ngIf="isLoadingResults"></mat-spinner>
   	</div>
 
+	  <div class="welcome-message">
+		<p class="content">Click on a row to see more details.</p>
+	  </div>
 
 	<table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows class="mat-elevation-z4">
 
@@ -167,7 +170,7 @@
 		</td>
 		</ng-container>
 
-		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+		<tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
 		<tr mat-row *matRowDef="let element; columns: displayedColumns;"
 			class="element-row"
 			[class.expanded-row]="expandedElement === element"
@@ -179,7 +182,7 @@
 
 
     
-  <div class="welcome-message">
+  <div class="footer-message">
     <p class="content">Thanks for visiting. Some of the links are affiliate links.</p>
   </div>
 

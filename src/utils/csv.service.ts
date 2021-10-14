@@ -5,8 +5,6 @@ import { GoogleSheetsDbService } from 'ng-google-sheets-db';
 /**
  * Source: https://www.npmjs.com/package/ng-google-sheets-db
  */
-
-// @todo - finish mapping with watch.ts
 const sheetToModelMapping = {
   // model | sheet
   manufacturer: "Manufacturer",
