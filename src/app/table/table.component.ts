@@ -9,9 +9,11 @@ const tableHeaders: Array<string> = [
 	'Model',
 	'Width',
 	'Lug Width',
+  'Thickness',
 	'Movement',
+	'Winding Action',
 	'Warranty',
-	'Link',
+	'Purchase Link',
 ];
 
 @Component({
@@ -38,8 +40,8 @@ export class TableComponent implements OnInit {
   }
 
   openLink(element:any): void {
-    this.analytics.eventEmitter(`open_url_${element.link}`, 'Link-clicked', 'click', `${element.link}`);
-    window.open(element.link);
+    this.analytics.eventEmitter(`open_url_${element.link.readable}`, 'Link-clicked', 'click', `${element.link.readable}`);
+    window.open(element.link.url);
   }
 
   updateColumns(columns: Array<string>) {

@@ -4,15 +4,47 @@ import { HttpClient } from '@angular/common/http';
 import { map } from "rxjs/operators";
 import { GoogleSheetsDbService } from 'ng-google-sheets-db';
 
+/**
+ * Source: https://www.npmjs.com/package/ng-google-sheets-db
+ */
+
+// @todo - finish mapping with watch.ts
 const sheetToModelMapping = {
   // model | sheet
   manufacturer: "Manufacturer",
   model: "Model",
   sizeWidth: "Width",
+  sizeLength: "L2L Width",
+  thickness: "Thickness",
   lugWitdh: "Lug Width",
-  movement: "Movement",
+  movement: {
+    _prefix: "Movement ",
+    manufacturer: "Manufacturer",
+    winding: "Winding",
+    bph: "BPH",
+  },
+  dial: "Dials",
+  lume: {
+    _prefix: "Lume ",
+    product: "Product",
+    colour: "Colour",
+  },
+  bezel: {
+    _prefix: "Bezel ",
+    insertMaterial: "Material",
+    clicks: "Clicks",
+    colour: "Colour",
+  },
+  strap: {
+    _prefix: "Strap ",
+    material: "Material",
+  },
   warranty: "Warranty",
-  link: "Link",
+  link: {
+    _prefix: "Link ",
+    url: "URL",
+    readable: "Readable",
+  },
 };
 
 

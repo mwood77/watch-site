@@ -16,6 +16,7 @@ export interface Watch {
     dial: [Colours];
     lume?: Lume;
     bezel?: Bezel;
+    strap: Strap;
     warranty?: Warranty;
     link: Link;
 }
