@@ -9,7 +9,7 @@
     "e2e": "ng e2e",
     "config": "ts-node -O '{\"module\": \"commonjs\"}' ./config.index.ts",
     "build": "npm run config && ng build --prod --output-path=docs",
-    "deploy": "npm run config && ng build --prod --output-path docs --base-href /watch-site/"
+    "deploy": "npm run config && ng build --prod --output-path docs --base-href /"
   },
   "private": true,
   "dependencies": {
