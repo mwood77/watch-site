@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -9,6 +9,7 @@ import { BehaviorSubject } from 'rxjs';
 import { CsvService } from 'src/utils/csv.service';
 import { AnalyticsService } from '../../utils/analytics.service';
 import { Watch } from '../models/watch';
+import { environment } from 'src/environments/environment';
 
 const tableHeaders: Array<string> = [
 	'manufacturer',
@@ -20,6 +21,16 @@ const tableHeaders: Array<string> = [
 	'movementManufacturer',
 	'winding',
 	'warranty',
+	'Purchase Link',
+];
+
+const tableHeaderMobile: Array<string> = [
+	'manufacturer',
+	'model',
+	'sizeWidth',
+  'sizeLength',
+  'thickness',
+	'movementManufacturer',
 	'Purchase Link',
 ];
 
@@ -35,13 +46,15 @@ const tableHeaders: Array<string> = [
     ]),
   ],
 })
-export class TableComponent implements AfterViewInit {
+export class TableComponent implements OnInit, AfterViewInit {
+
+  version: string = environment.version;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatAccordion) accordion: MatAccordion;
 
   dataSource: any;
-  displayedColumns = tableHeaders;
+  displayedColumns: Array<string>;
   columns = new BehaviorSubject<Array<string>>([]);
   isLoadingResults = true;
 
@@ -63,6 +76,16 @@ export class TableComponent implements AfterViewInit {
 
   searchTable(input: string) {
     this.dataSource.filter = input.toLocaleLowerCase().trim();
+  }
+
+  ngOnInit() {
+    // detect mobile browser by pointer hover
+    if(window.matchMedia("(any-hover: none)").matches) {
+      console.warn('using mobile headers')
+      this.displayedColumns = tableHeaderMobile;
+    } else {
+      this.displayedColumns = tableHeaders;
+    }
   }
 
   ngAfterViewInit() {

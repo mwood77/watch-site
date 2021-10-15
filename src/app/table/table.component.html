@@ -2,7 +2,7 @@
 
     <!-- Search bar -->
     <mat-form-field>
-        <input matInput placeholder="search for keywords (ex. Rolex)" #input (keyup)="searchTable(input.value)" type="text">
+        <input matInput placeholder="Search (ex. Rolex or Seamaster)" #input (keyup)="searchTable(input.value)" type="text" style="color: black">
     </mat-form-field>
 
 	<div class="loading-shade"
@@ -11,7 +11,7 @@
   	</div>
 
 	  <div class="welcome-message">
-		<p class="content">Click on a row to see more details.</p>
+		<p class="content">Click on a row to see more details</p>
 	  </div>
 
 	<table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows class="mat-elevation-z4">
@@ -184,6 +184,7 @@
     
   <div class="footer-message">
     <p class="content">Thanks for visiting. Some of the links are affiliate links.</p>
+	<p class="content">{{version}}</p>
   </div>
 
   <div class="message">
