@@ -54,6 +54,7 @@ const sheetToModelMapping = {
     url: "URL",
     readable: "Readable",
   },
+  review: "Review",
 };
 
 

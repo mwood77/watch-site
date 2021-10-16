@@ -21,6 +21,7 @@ export interface Watch {
     strap: Strap;
     warranty?: Warranty;
     link: Link;
+    review: string;
 }
 
 export interface Movement {

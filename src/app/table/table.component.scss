@@ -27,11 +27,16 @@
       justify-content: center;
     }
 
+    mat-icon {
+      vertical-align: middle;
+      padding-right: 0.3em;
+      font-size: 1.2em;
+      height: 1.2em;
+      width: 1.2em;
+    }
+
     mat-form-field {
-      margin: 3% 0%;
-      width: 50%;
-      justify-content: center;
-      align-items: center;
+      width: 100%;
     }
 
     .mat-row:hover {
@@ -116,8 +121,6 @@
             font-weight: 800;
           }
 
-
-
         }
 
       }
@@ -141,13 +144,49 @@
       .button-padding-correction {
         padding-left: 16px;
       }
-  
+
+         
       mark {
+        // table global
         background-color: #3e2723;
         font-weight: 500;
         color: #e2e2e2;
       }
+
+      .review-button {
+
+        button {
+          display: block;
+          width: 100% !important;
+          min-width: unset!important;
+        }
+
+        button.mat-raised-button {
+          background-color: #FF0000;
+        }
+        mark {
+          background-color: #FF0000;
+        }
+      }
   
+      .buy-button {
+        
+        button {
+          display: block;
+          width: 100% !important;
+          min-width: unset!important;
+        }
+
+        button.mat-raised-button {
+          background-color: #1F7A8C;
+        }
+        mark {
+          background-color: #1F7A8C;
+          font-weight: 500;
+          color: #e2e2e2;
+        }
+      }
+
     }
   
   
@@ -196,7 +235,8 @@
     @media (max-width: 1200px) {
 
       mat-form-field, .welcome-message, .footer-message {
-        margin-left: 1rem;
+        margin: 0 1rem;
+        width: 98%;
       }
 
       table {
