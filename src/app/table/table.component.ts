@@ -68,6 +68,10 @@ export class TableComponent implements OnInit, AfterViewInit {
     this.analytics.eventEmitter(`open_url_${element.link.readable}`, 'Link-clicked', 'click', `${element.link.readable}`);
     window.open(element.link.url);
   }
+  openReview(element:any): void {
+    this.analytics.eventEmitter(`open_url_${element.link.readable}`, 'Link-clicked', 'click', `${element.link.readable}`);
+    window.open(element.review);
+  }
 
   updateColumns(columns: Array<string>) {
     this.columns.next(columns);
