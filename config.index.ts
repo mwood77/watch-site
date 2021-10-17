@@ -1,11 +1,10 @@
 import {writeFile} from 'fs';
 
-import {name, version} from './package.json';
-
 const targetPath = './src/environments/environment.prod.ts';
 
 const envConfigFile = `export const environment = {
    production: true,
+   version: require('../../package.json').version,
    key: '${process.env.GOOGLE_CLOUD_API_KEY}'
 };
 `;
