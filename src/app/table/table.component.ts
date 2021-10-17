@@ -85,7 +85,7 @@ export class TableComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     // detect mobile browser by pointer hover
     if(window.matchMedia("(any-hover: none)").matches) {
-      console.warn('using mobile headers')
+      console.warn('Using mobile headers')
       this.displayedColumns = tableHeaderMobile;
     } else {
       this.displayedColumns = tableHeaders;

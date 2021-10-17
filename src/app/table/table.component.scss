@@ -1,7 +1,8 @@
 
 .container {
-
+  
   position: relative;
+  margin-top: 2rem;
   color: rgba(0, 0, 0, 0.54);
 
     .welcome-message {
@@ -118,7 +119,7 @@
           font-size: 15px;
 
           span {
-            font-weight: 800;
+            color:rgba(0, 0, 0, 0.87);
           }
 
         }
@@ -166,6 +167,7 @@
         }
         mark {
           background-color: #FF0000;
+          color: #ffffff;
         }
       }
   
@@ -183,7 +185,7 @@
         mark {
           background-color: #1F7A8C;
           font-weight: 500;
-          color: #e2e2e2;
+          color: #ffffff;
         }
       }
 
@@ -235,7 +237,7 @@
     @media (max-width: 1200px) {
 
       mat-form-field, .welcome-message, .footer-message {
-        margin: 0 1rem;
+        margin: 1rem 1rem;
         width: 98%;
       }
 
