@@ -7,7 +7,7 @@
 				<mat-icon aria-hidden="false" aria-label="search icon">search</mat-icon>
 				Try searching "Rolex" or "Seamaster" or "Willard"
 			</mat-label>
-			<input matInput placeholder="" #input (keyup)="searchTable(input.value)" type="text" style="color: black">
+			<input matInput placeholder="" #input value="{{this.searchParams}}" (keyup)="searchTable(input.value)" type="text" style="color: black">
 		</mat-form-field>
 	</div>
 
@@ -108,9 +108,6 @@
 							</div>
 							<div class="detail-item">
 								<span>Bezel</span>
-								<!-- <p class="">
-									{{ element.bezel.insertMaterial }}, {{ element.bezel.clicks }} clicks
-								</p> -->
 								<p class="" *ngIf="element.bezel.clicks !== 'n/a' ; else bezelColour">
 									{{ element.bezel.insertMaterial }}, {{ element.bezel.clicks }} clicks
 								</p>
