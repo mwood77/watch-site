@@ -3,14 +3,26 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatAccordion } from '@angular/material/expansion';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-
-import { BehaviorSubject } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 import { CsvService } from 'src/utils/csv.service';
 import { AnalyticsService } from '../../utils/analytics.service';
-import { Watch } from '../models/watch';
+import { Movement, Watch, Strap, Luminous, Bezel } from '../models/watch';
 import { environment } from 'src/environments/environment';
+import { MatTableFilter } from 'mat-table-filter';
+
+interface Price {
+  value: string;
+  viewValue: string
+}
+
+const prices: Array<Price> = [
+  { value: '', viewValue: 'Any' },
+  { value: '0', viewValue: '$0-$100' },
+  { value: '1', viewValue: '$100-$200' },
+  { value: '2', viewValue: '$200-$300' },
+  { value: '3', viewValue: '$300+' },
+]
 
 const tableHeaders: Array<string> = [
 	'manufacturer',
@@ -48,19 +60,22 @@ const tableHeaderMobile: Array<string> = [
   ],
 })
 export class TableComponent implements OnInit, AfterViewInit {
-
-  version: string = environment.version;
-
+  
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatAccordion) accordion: MatAccordion;
 
-  dataSource: any;
-  displayedColumns: Array<string>;
-  isLoadingResults = true;
-
-  searchParams: "";
-
   expandedElement: Watch | null;
+
+  version: string = environment.version;
+  searchParams: string = "";
+
+  dataSource: any;
+  isLoadingResults = true;
+  displayedColumns: Array<string>;
+  pricing = prices;
+
+  filterEntity: Watch;
+  filterType: MatTableFilter;
 
   constructor(
     private analytics: AnalyticsService,
@@ -82,6 +97,16 @@ export class TableComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.filterEntity = new Watch();
+    this.filterEntity.movement = new Movement();
+    this.filterEntity.strap = new Strap();
+    this.filterEntity.bezel = new Bezel();
+    this.filterEntity.lume = new Luminous();
+
+    // set default price select
+    this.filterEntity.price = '';
+
+    this.filterType = MatTableFilter.ANYWHERE;
 
     // detect mobile browser by pointer hover
     if(window.matchMedia("(any-hover: none)").matches) {
@@ -103,7 +128,7 @@ export class TableComponent implements OnInit, AfterViewInit {
           params => {
             if ( Object.keys(params).length !== 0 && params.hasOwnProperty("search")) {
               this.searchParams = params.search;
-              this.searchTable(this.searchParams);
+              this.filterEntity.homage = this.searchParams;
             }
           }
         )

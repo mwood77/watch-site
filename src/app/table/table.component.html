@@ -7,7 +7,14 @@
 				<mat-icon aria-hidden="false" aria-label="search icon">search</mat-icon>
 				Try searching "Rolex" or "Seamaster" or "Willard"
 			</mat-label>
-			<input matInput placeholder="" #input value="{{this.searchParams}}" (keyup)="searchTable(input.value)" type="text" style="color: black">
+			<input 
+				matInput 
+				placeholder="" 
+				#input 
+				value="{{this.searchParams}}" 
+				[(ngModel)]="filterEntity.homage"
+				type="text" 
+				style="color: black">
 		</mat-form-field>
 	</div>
 
@@ -16,11 +23,49 @@
 		<mat-spinner *ngIf="isLoadingResults"></mat-spinner>
   	</div>
 
-	  <div class="welcome-message">
-		<p class="content">Click on a row to see more details</p>
-	  </div>
+	<div>
+		<p class="content welcome-message">Filters</p>
+		<div class="filters">
+			<mat-form-field appearance="fill" class="filter-field">
+				<mat-label>Case Width</mat-label>
+				<input matInput placeholder="Ex. 42" [(ngModel)]="filterEntity.sizeWidth">
+			</mat-form-field>
+	
+			<mat-form-field appearance="fill" class="filter-field">
+				<mat-label>Dial Colour</mat-label>
+				<input matInput placeholder="Ex. Yellow" [(ngModel)]="filterEntity.dial">
+			</mat-form-field>
+	
+			<mat-form-field appearance="fill" class="filter-field">
+				<mat-label>Lug Width</mat-label>
+				<input matInput placeholder="Ex. 20" [(ngModel)]="filterEntity.lugWitdh">
+			</mat-form-field>
 
-	<table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows class="mat-elevation-z4">
+			<mat-form-field appearance="fill" class="filter-field">
+				<mat-label>Price Range</mat-label>
+				<mat-select [(ngModel)]="filterEntity.price">
+					<mat-option *ngFor="let price of pricing" value="{{price.value}}" >
+						{{ price.viewValue }}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
+	</div>
+
+	<div class="welcome-message">
+		<p class="content">Click on a row to see more details</p>
+	</div>
+
+
+	<table 
+		mat-table 
+		matSort 
+		matTableFilter 
+		multiTemplateDataRows 
+		[dataSource]="dataSource" 
+		[exampleEntity]="filterEntity"
+		[filterType]="filterType"
+		class="mat-elevation-z4">
 
 		<!-- Manufacturer -->
 		<ng-container matColumnDef="manufacturer">
@@ -175,6 +220,16 @@
 								<p class="">
 									{{ element.strap.buckle }}
 								</p>
+							</div>
+							<div class="detail-item">
+								<span>Price</span>
+								
+								<ng-container *ngFor="let readablePrice of pricing">
+									<p class="" *ngIf="readablePrice.value === element.price">
+										{{ readablePrice.viewValue }}
+									</p>
+								</ng-container>
+
 							</div>
 							<div class="review-button" *ngIf="element.review.length > 1">
 								<button mat-raised-button (click)="openReview(element)">

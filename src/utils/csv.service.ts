@@ -55,6 +55,7 @@ const sheetToModelMapping = {
     readable: "Readable",
   },
   review: "Review",
+  price: "Price"
 };
 
 
@@ -65,8 +66,6 @@ const WORKSHEET = 'main';
   providedIn: 'root'
 })
 export class CsvService {
-
-  characters$: Observable<any[]>;
 
   constructor(private googleSheetsDbService: GoogleSheetsDbService) { }
 

@@ -5,7 +5,7 @@ import { Lume } from "./enums/lume";
 import { Materials } from "./enums/materials";
 import { Movements } from "./enums/movements";
 
-export interface Watch {
+export class Watch {
     manufacturer: string;
     model: string;
     style: string;
@@ -22,15 +22,16 @@ export interface Watch {
     warranty?: Warranty;
     link: Link;
     review: string;
+    price: string;
 }
 
-export interface Movement {
+export class Movement {
     winding: Movements;
     manufacturer: Movements;
     bph: Movements;
 }
 
-export interface Strap {
+export class Strap {
     material: Materials;
     buckle?: Materials
     clasp?: {
@@ -39,24 +40,24 @@ export interface Strap {
     }
 }
 
-export interface Luminous {
+export class Luminous {
     product: Lume
     colour: Lume;
 }
 
-export interface Bezel {a
+export class Bezel {
     insertMaterial: string;
     clicks?: string;
     luminous?: Lume;
     colour: [Colours];
 }
 
-export interface Warranty {
+export class Warranty {
     duration: number;
     distributors: Locales
 }
 
-export interface Link {
+export class Link {
     displayName: string;
     url: string;
     affiliate?: string;

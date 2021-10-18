@@ -4,13 +4,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import { AnalyticsService } from '../utils/analytics.service';
 import { HttpClientModule } from '@angular/common/http';
-import { MaterialImportModule } from './material-import/material-import.module';
-import { TableComponent } from './table/table.component';
+import { FormsModule } from "@angular/forms"
 
 import { API_KEY, GoogleSheetsDbService } from 'ng-google-sheets-db';
+import { MatTableFilterModule } from 'mat-table-filter'
+
+import { AnalyticsService } from '../utils/analytics.service';
+import { MaterialImportModule } from './material-import/material-import.module';
+import { TableComponent } from './table/table.component';
 import { environment } from 'src/environments/environment';
 
 @NgModule({
@@ -24,6 +26,8 @@ import { environment } from 'src/environments/environment';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialImportModule,
+    MatTableFilterModule,
+    FormsModule,
   ],
   providers: [
     AnalyticsService,

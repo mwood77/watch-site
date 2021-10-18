@@ -9,6 +9,17 @@
       margin: 0;
       font-size: 16px;
     }
+
+    .filters {
+      display: flex;
+      flex-direction: row;
+      align-content: space-between;
+
+      .filter-field {
+        margin: 0 1rem;
+      }
+
+    }
     
     .footer-message {
       margin: 3% 0%;
@@ -165,10 +176,12 @@
         button.mat-raised-button {
           background-color: #FF0000;
         }
+
         mark {
           background-color: #FF0000;
           color: #ffffff;
         }
+
       }
   
       .buy-button {
@@ -182,16 +195,18 @@
         button.mat-raised-button {
           background-color: #1F7A8C;
         }
+
         mark {
           background-color: #1F7A8C;
           font-weight: 500;
           color: #ffffff;
         }
+
       }
 
     }
   
-  
+
     .message {
       display: none;
       visibility: hidden;
@@ -239,6 +254,14 @@
       mat-form-field, .welcome-message, .footer-message {
         margin: 1rem 1rem;
         width: 98%;
+      }
+
+      .filters {
+        flex-wrap: wrap;
+        // flex-basis: 50%;
+        mat-form-field:nth-child(1n) {
+          flex-basis: 40%;
+        }
       }
 
       table {
