@@ -5,13 +5,13 @@
 		<mat-form-field appearance="outline" >
 			<mat-label>
 				<mat-icon aria-hidden="false" aria-label="search icon">search</mat-icon>
-				Try searching "Rolex" or "Seamaster" or "Willard"
+				Search
 			</mat-label>
 			<input 
 				matInput 
-				placeholder="" 
+				placeholder="Searching by manufacturer, model, or nickname (Ex. 'Rolex' or 'Seamaster' or 'Steve McQueen')" 
 				#input 
-				value="{{trimWhitespace(this.searchParams)}}" 
+				value="{{this.searchParams}}" 
 				[(ngModel)]="filterEntity.homage"
 				type="text" 
 				style="color: black">
@@ -25,6 +25,7 @@
 
 	<div>
 		<p class="content welcome-message">Filters</p>
+
 		<div class="filters">
 			<mat-form-field appearance="fill" class="filter-field">
 				<mat-label>Case Width</mat-label>
@@ -38,7 +39,7 @@
 	
 			<mat-form-field appearance="fill" class="filter-field">
 				<mat-label>Lug Width</mat-label>
-				<input matInput placeholder="Ex. 20" [(ngModel)]="filterEntity.lugWitdh">
+				<input matInput placeholder="Ex. 20" [(ngModel)]="filterEntity.lugWidth">
 			</mat-form-field>
 
 			<mat-form-field appearance="fill" class="filter-field">
@@ -49,6 +50,13 @@
 					</mat-option>
 				</mat-select>
 			</mat-form-field>
+
+			<button mat-stroked-button color="primary" (click)="generateLink()">
+				<!-- <mark> -->
+					Share this Search
+				<!-- </mark> -->
+			</button>
+			
 		</div>
 	</div>
 

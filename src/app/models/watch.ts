@@ -13,7 +13,7 @@ export class Watch {
     sizeWidth: number;
     sizeLength?: number;
     thickness?: number;
-    lugWitdh: number;
+    lugWidth: number;
     movement: Movement;
     dial: [Colours];
     lume?: Lume;

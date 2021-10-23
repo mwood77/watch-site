@@ -4,12 +4,15 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatAccordion } from '@angular/material/expansion';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
+import { MatTableFilter } from 'mat-table-filter';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Clipboard } from "@angular/cdk/clipboard"
 
 import { CsvService } from 'src/utils/csv.service';
 import { AnalyticsService } from '../../utils/analytics.service';
 import { Movement, Watch, Strap, Luminous, Bezel } from '../models/watch';
-import { environment } from 'src/environments/environment';
-import { MatTableFilter } from 'mat-table-filter';
+import { HttpParams, HttpRequest } from '@angular/common/http';
 
 interface Price {
   value: string;
@@ -80,24 +83,47 @@ export class TableComponent implements OnInit, AfterViewInit {
   constructor(
     private analytics: AnalyticsService,
     private route: ActivatedRoute,
-    private csv: CsvService) { }
+    private csv: CsvService,
+    private _snackBar: MatSnackBar,
+    private clipboard: Clipboard) { }
 
-  openLink(element:any): void {
+  openLink(element: any): void {
     this.analytics.eventEmitter(`open_url_${element.link.readable}`, 'Link-clicked', 'click', `${element.link.readable}`);
     window.open(element.link.url);
   }
-  openReview(element:any): void {
-    this.analytics.eventEmitter(`open_url_${element.link.readable}`, 'Link-clicked', 'click', `${element.link.readable}`);
+
+  openReview(element: any): void {
+    this.analytics.eventEmitter(`open_url_${element.link.readable}`, 'review-clicked', 'click', `${element.link.readable}`);
     window.open(element.review);
   }
 
-  trimWhitespace(input: string): void {
-    this.searchParams = input.trim();
-  }
+  // @todo - super hackish, fix this
+  generateLink() {
+    const URL = 'https://aliwatchfinder.com'
+    let obj = {};
 
+    if ( this.filterEntity.lugWidth.toString() !== '' || undefined) {
+      obj['lug_width'] = this.filterEntity.lugWidth;
+    }
+    if ( this.filterEntity.homage.toString() !== '' || undefined) {
+      obj['search'] = this.filterEntity.homage;
+    }
+    if ( this.filterEntity.sizeWidth.toString() !== '' || undefined) {
+      obj['case_width'] = this.filterEntity.sizeWidth;
+    }
+    if ( this.filterEntity.dial.toString() !== '' || undefined) {
+      obj['dial_color'] = this.filterEntity.dial;
+    }
+    if ( this.filterEntity.price.toString() !== '' || undefined) {
+      obj['price'] = this.filterEntity.price;
+    }
 
-  searchTable(input: string) {
-    this.dataSource.filter = input.toLocaleLowerCase().trim();
+    const queryParamsString = new HttpParams( { fromObject: obj });
+    this.clipboard.copy(URL + "?" + queryParamsString.toString());
+
+    this._snackBar.open('URL copied to clipboard', 'OK', {
+      duration: 3500
+    });
   }
 
   ngOnInit() {
@@ -126,19 +152,41 @@ export class TableComponent implements OnInit, AfterViewInit {
       response => {
         this.dataSource = new MatTableDataSource(response);
         this.dataSource.sort = this.sort;
-        this.isLoadingResults = false;
 
         this.route.queryParams.subscribe(
           params => {
-            if ( Object.keys(params).length !== 0 && params.hasOwnProperty("search")) {
-              this.searchParams = params.search;
-              this.filterEntity.homage = this.searchParams;
-            }
-          }
-        )
+            if ( Object.keys(params).length !== 0 )
+              
+              // @todo - super hackish, fix this
+              Object.keys(params).forEach(
+                key => {
+                  
+                  if (key === 'search') {
+                    this.searchParams = params.search;
+                    this.filterEntity.homage = this.searchParams;
+                  }
 
-      }
-    )
+                  if (key === 'price') {
+                    this.filterEntity.price = params.price;
+                  }
+
+                  if (key === 'lug_width') {
+                    this.filterEntity.lugWidth = params.lug_width;
+                  }
+
+                  if (key === 'dial_color') {
+                    this.filterEntity.dial = params.dial_color;
+                  }
+                
+                  if (key === 'case_width') {
+                    this.filterEntity.sizeWidth = params.case_width;
+                  }
+
+              });
+          });
+            
+        this.isLoadingResults = false;
+    });
   }
 
 }

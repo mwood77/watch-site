@@ -9,8 +9,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSortModule } from '@angular/material/sort';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatIconModule } from '@angular/material/icon'
-import { MatSelectModule } from '@angular/material/select'
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ClipboardModule } from '@angular/cdk/clipboard'
 
 @NgModule({
   declarations: [],
@@ -26,6 +28,8 @@ import { MatSelectModule } from '@angular/material/select'
     MatProgressSpinnerModule,
     MatIconModule,
     MatSelectModule,
+    MatSnackBarModule,
+    ClipboardModule,
   ],
   exports: [
     MatTabsModule,
@@ -38,6 +42,8 @@ import { MatSelectModule } from '@angular/material/select'
     MatProgressSpinnerModule,
     MatIconModule,
     MatSelectModule,
-  ]
+    MatSnackBarModule,
+    ClipboardModule,
+  ],
 })
 export class MaterialImportModule { }

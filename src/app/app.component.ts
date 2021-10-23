@@ -24,7 +24,7 @@ export class AppComponent {
   title = 'AliExpress Watch Filer';
 
   routerLinks = [
-    { path: '', label: 'Watch Finder for r/ChineseWatches' },
+    { path: '', label: 'AliExpress Watch Finder' },
   ];
 
 }
