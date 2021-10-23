@@ -70,7 +70,7 @@ export class TableComponent implements OnInit, AfterViewInit {
   expandedElement: Watch | null;
 
   version: string = environment.version;
-  searchParams: string = "";
+  searchParams: string = '';
 
   dataSource: any;
   isLoadingResults = true;
@@ -100,22 +100,22 @@ export class TableComponent implements OnInit, AfterViewInit {
   // @todo - super hackish, fix this
   generateLink() {
     const URL = 'https://aliwatchfinder.com'
-    let obj = {};
+    let obj: any = {};
 
-    if ( this.filterEntity.lugWidth.toString() !== '' || undefined) {
-      obj['lug_width'] = this.filterEntity.lugWidth;
+    if ( this.filterEntity.lugWidth != '' ) {
+      obj.lug_width = this.filterEntity.lugWidth;
     }
-    if ( this.filterEntity.homage.toString() !== '' || undefined) {
-      obj['search'] = this.filterEntity.homage;
+    if ( this.filterEntity.homage != '' ) {
+      obj.search = this.filterEntity.homage;
     }
-    if ( this.filterEntity.sizeWidth.toString() !== '' || undefined) {
-      obj['case_width'] = this.filterEntity.sizeWidth;
+    if ( this.filterEntity.sizeWidth != '' ) {
+      obj.case_width = this.filterEntity.sizeWidth;
     }
-    if ( this.filterEntity.dial.toString() !== '' || undefined) {
-      obj['dial_color'] = this.filterEntity.dial;
+    if ( this.filterEntity.dial != '' ) {
+      obj.dial_color = this.filterEntity.dial;
     }
-    if ( this.filterEntity.price.toString() !== '' || undefined) {
-      obj['price'] = this.filterEntity.price;
+    if ( this.filterEntity.price != '' ) {
+      obj.price = this.filterEntity.price;
     }
 
     const queryParamsString = new HttpParams( { fromObject: obj });
@@ -128,6 +128,9 @@ export class TableComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.filterEntity = new Watch();
+    this.filterEntity.lugWidth = '';
+    this.filterEntity.sizeWidth = '';
+    this.filterEntity.dial = '';
     this.filterEntity.movement = new Movement();
     this.filterEntity.strap = new Strap();
     this.filterEntity.bezel = new Bezel();

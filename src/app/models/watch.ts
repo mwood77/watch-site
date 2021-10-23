@@ -10,12 +10,12 @@ export class Watch {
     model: string;
     style: string;
     homage: string;
-    sizeWidth: number;
+    sizeWidth: string;
     sizeLength?: number;
     thickness?: number;
-    lugWidth: number;
+    lugWidth: string;
     movement: Movement;
-    dial: [Colours];
+    dial: string;
     lume?: Lume;
     bezel?: Bezel;
     strap: Strap;
