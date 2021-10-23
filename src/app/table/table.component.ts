@@ -91,6 +91,10 @@ export class TableComponent implements OnInit, AfterViewInit {
     window.open(element.review);
   }
 
+  trimWhitespace(input: string): void {
+    this.searchParams = input.trim();
+  }
+
 
   searchTable(input: string) {
     this.dataSource.filter = input.toLocaleLowerCase().trim();

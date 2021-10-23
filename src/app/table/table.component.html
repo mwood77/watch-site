@@ -11,7 +11,7 @@
 				matInput 
 				placeholder="" 
 				#input 
-				value="{{this.searchParams}}" 
+				value="{{trimWhitespace(this.searchParams)}}" 
 				[(ngModel)]="filterEntity.homage"
 				type="text" 
 				style="color: black">
