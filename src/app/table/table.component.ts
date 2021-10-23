@@ -105,7 +105,8 @@ export class TableComponent implements OnInit, AfterViewInit {
     if ( this.filterEntity.lugWidth != '' ) {
       obj.lug_width = this.filterEntity.lugWidth;
     }
-    if ( this.filterEntity.homage != '' ) {
+    if ( this.filterEntity.homage != '' || undefined ) {
+      console.log(this.filterEntity.homage)
       obj.search = this.filterEntity.homage;
     }
     if ( this.filterEntity.sizeWidth != '' ) {
@@ -131,6 +132,7 @@ export class TableComponent implements OnInit, AfterViewInit {
     this.filterEntity.lugWidth = '';
     this.filterEntity.sizeWidth = '';
     this.filterEntity.dial = '';
+    this.filterEntity.homage = '';
     this.filterEntity.movement = new Movement();
     this.filterEntity.strap = new Strap();
     this.filterEntity.bezel = new Bezel();
